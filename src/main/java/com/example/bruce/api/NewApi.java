@@ -16,7 +16,8 @@ public class NewApi {
         return model;
     }
 
-    @GetMapping("/new")
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    @ResponseBody
     public Object getAllNew() {
         return newDTOS;
     }
