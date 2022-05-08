@@ -13,6 +13,7 @@ public class NewApi {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseBody
     public NewDTO createNew(@RequestBody NewDTO model) {
+        newDTOS.add(model);
         return model;
     }
 
