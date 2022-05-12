@@ -40,4 +40,9 @@ public class UserController {
     public Object login(@RequestBody LoginRequest loginRequest) {
         return this.userService.login(loginRequest);
     }
+
+    @GetMapping("/users/login")
+    public Object getUserLogin(@RequestBody LoginRequest loginRequest) {
+        return this.userService.login(loginRequest);
+    }
 }
