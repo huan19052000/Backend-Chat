@@ -41,8 +41,4 @@ public class UserController {
         return this.userService.login(loginRequest);
     }
 
-    @GetMapping("/users/login")
-    public Object getUserLogin(@RequestBody LoginRequest loginRequest) {
-        return this.userService.login(loginRequest);
-    }
 }
