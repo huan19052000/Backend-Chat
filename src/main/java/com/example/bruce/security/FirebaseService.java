@@ -1,6 +1,8 @@
 package com.example.bruce.security;
 
+import com.example.bruce.model.Pair;
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.Bucket;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -37,9 +39,10 @@ public class FirebaseService {
         return multipartFile.getOriginalFilename();
     }
 
-    public byte[] getImage(String name) {
+    public Pair<byte[], String> getImage(String name) {
         Bucket bucket = StorageClient.getInstance().bucket();
-        return bucket.get(name).getContent();
+        Blob bl = bucket.get(name);
+        return new Pair<>(bucket.get(name).getContent(), bl.getContentType());
     }
 
 }
