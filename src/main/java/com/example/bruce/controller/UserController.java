@@ -3,6 +3,8 @@ package com.example.bruce.controller;
 
 import com.example.bruce.model.User;
 import com.example.bruce.model.request.LoginRequest;
+import com.example.bruce.model.request.RegisterRequest;
+import com.example.bruce.model.response.ResponseException;
 import com.example.bruce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,26 +21,19 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
-    private List<User> users = new ArrayList<>();
     @GetMapping("/users")
     public Object getAllUsers() {
-        return users;
+        return this.userService.getAll();
     }
 
-    @PostMapping("/users")
-    public Object creatUser(@RequestBody User user) throws Exception{
-        for (User user1 : users) {
-            if (user1.getId() == user.getId()) {
-                throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,"");
-            }
-        }
-        users.add(user);
-        return user;
-    }
 
     @PostMapping("/users/login")
-    public Object login(@RequestBody LoginRequest loginRequest) {
+    public Object login(@RequestBody LoginRequest loginRequest) throws ResponseException {
         return this.userService.login(loginRequest);
     }
 
+    @PostMapping("users/register")
+    public Object register(@RequestBody RegisterRequest request) throws ResponseException {
+        return this.userService.register(request);
+    }
 }

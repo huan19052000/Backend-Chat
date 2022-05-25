@@ -1,5 +1,6 @@
 package com.example.bruce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ public class UserProfileEntity {
     @Column(name = "username")
     private String userName;
     @Column(name = "password")
+    @JsonIgnore
     private String passWord;
     private String email;
     private String description;
@@ -27,6 +29,8 @@ public class UserProfileEntity {
     @Column(name = "updated_at")
     @CreatedDate
     private Date updatedAt;
+
+    private String avatar;
 
     public int getId() {
         return id;
@@ -98,5 +102,13 @@ public class UserProfileEntity {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

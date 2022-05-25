@@ -1,18 +1,19 @@
-package com.example.bruce.model;
+package com.example.bruce.model.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-public class User {
+
+public class RegisterRequest {
     @JsonProperty(required = true)
     private String username;
     @JsonProperty(required = true)
     private String password;
-
+    private String avatar;
     @JsonProperty(required = true)
     private String email;
-
     @JsonProperty(required = true)
-    private String avatar;
-
+    private String firstName;
+    @JsonProperty(required = true)
+    private String lastName;
 
     public String getUsername() {
         return username;
@@ -30,6 +31,14 @@ public class User {
         this.password = password;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -38,11 +47,19 @@ public class User {
         this.email = email;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

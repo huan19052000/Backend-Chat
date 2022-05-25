@@ -7,6 +7,7 @@ create table user_profile
     password    varchar(500)             not null,
     email       varchar(50),
     description varchar(500),
+    avatar varchar(255),
     first_name varchar(255) not null ,
     last_name varchar(255) not null ,
     created_at  timestamp default now(),
