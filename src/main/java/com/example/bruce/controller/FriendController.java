@@ -4,9 +4,7 @@ import com.example.bruce.model.request.MakingFriendRequest;
 import com.example.bruce.model.response.ResponseException;
 import com.example.bruce.service.FriendService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class FriendController {
@@ -18,4 +16,10 @@ public class FriendController {
         return friendService.makeFriend( request.getFriendId());
     }
 
+    @GetMapping("/api/friends")
+    public Object getFriend(
+            @RequestParam(value = "status", required = false) String status
+    ){
+        return friendService.getAllFriends(status);
+    }
 }

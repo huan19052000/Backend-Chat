@@ -4,6 +4,7 @@ import com.example.bruce.entity.FriendEntity;
 import com.example.bruce.entity.UserProfileEntity;
 import com.example.bruce.model.response.ResponseException;
 import com.example.bruce.repository.FriendRepository;
+import com.example.bruce.repository.FriendResponseRepository;
 import com.example.bruce.repository.UserProfileRepository;
 import com.example.bruce.security.AuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class FriendService {
     private UserProfileRepository userProfileRepository;
     @Autowired
     private FriendRepository friendRepository;
+
+    @Autowired
+    private FriendResponseRepository friendResponseRepository;
 
     public Object makeFriend(int friendId) throws ResponseException {
         int userId = AuthorizationFilter.getCurrentUserId();
@@ -67,5 +71,11 @@ public class FriendService {
         //update to db
         this.friendRepository.save(friend);
         return friend;
+    }
+
+    public Object getAllFriends(String status) {
+        return friendResponseRepository.getAllFriends(
+                AuthorizationFilter.getCurrentUserId(), status == null ? "" : status
+        );
     }
 }

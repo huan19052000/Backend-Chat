@@ -41,7 +41,7 @@ public class UserService {
         claims.put("username", user.getUserName());
         claims.put("email", user.getEmail());
         return Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512,
-                "123a@").setExpiration(new Date(new Date().getTime() + 60*60*1000L))
+                "123a@").setExpiration(new Date(new Date().getTime() + 60*60*1000*1000L))
                 .compact();
     }
 
