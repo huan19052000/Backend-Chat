@@ -73,6 +73,22 @@ public class FriendService {
         return friend;
     }
 
+    public Object acceptFriend(int friendId) throws ResponseException {
+        int userId = AuthorizationFilter.getCurrentUserId();
+        FriendEntity friendEntity = this.friendRepository.findOneBySenderIdAndReceiverId(
+                friendId, userId
+        );
+        if ( friendEntity == null ){
+            throw new ResponseException("You can not accepted friend because user "+friendId+" not yet request");
+        }
+        if ( !"pending".equals(friendEntity.getStatus())){
+            throw new ResponseException("Status must be pending");
+        }
+        friendEntity.setStatus("accepted");
+        this.friendRepository.save(friendEntity);
+        return friendEntity;
+
+    }
     public Object getAllFriends(String status) {
         return friendResponseRepository.getAllFriends(
                 AuthorizationFilter.getCurrentUserId(), status == null ? "" : status

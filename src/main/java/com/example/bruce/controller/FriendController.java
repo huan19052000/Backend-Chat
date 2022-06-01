@@ -16,6 +16,15 @@ public class FriendController {
         return friendService.makeFriend( request.getFriendId());
     }
 
+    @PostMapping("/api/friends/accept")
+    public Object acceptFriend(
+            @RequestParam("friendId") int friendId
+    ) throws ResponseException {
+        return friendService.acceptFriend(
+                friendId
+        );
+    }
+
     @GetMapping("/api/friends")
     public Object getFriend(
             @RequestParam(value = "status", required = false) String status
