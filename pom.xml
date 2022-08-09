@@ -82,7 +82,23 @@
             <artifactId>firebase-admin</artifactId>
             <version>5.9.0</version>
         </dependency>
-            </dependencies>
+
+        <!--socket-->
+        <dependency>
+            <groupId>com.corundumstudio.socketio</groupId>
+            <artifactId>netty-socketio</artifactId>
+            <version>1.7.19</version>
+        </dependency>
+        <!--        end-->
+
+        <!--rxjava-->
+        <dependency>
+            <groupId>io.reactivex.rxjava2</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>2.1.13</version>
+        </dependency>
+        <!--end-->
+    </dependencies>
 
 
 

@@ -5,9 +5,9 @@ create table user_profile
             primary key,
     username    varchar(255)             not null,
     password    varchar(500)             not null,
+    avatar      varchar(255),
     email       varchar(50),
     description varchar(500),
-    avatar varchar(255),
     first_name varchar(255) not null ,
     last_name varchar(255) not null ,
     created_at  timestamp default now(),
@@ -21,7 +21,7 @@ create unique index user_profile_id_uindex
 
 create table message
 (
-    id          serial
+    id          uuid default gen_random_uuid()
         constraint message_pk
             primary key,
     sender_id   int                        not null
@@ -50,7 +50,43 @@ create table friend
         constraint friend_receiver_id___fk
             references user_profile,
     status          varchar(255) default 'pending' not null,
-    last_message_id int,
+    last_message_id uuid,
     created_at      timestamp    default now(),
     updated_at      timestamp    default now()
 );
+
+CREATE FUNCTION sync_updated_at() RETURNS trigger AS $$
+BEGIN
+    NEW.updated_at := NOW();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER
+    friend_updated_at
+    BEFORE UPDATE
+    ON
+        friend
+    FOR EACH ROW
+EXECUTE PROCEDURE
+    sync_updated_at();
+
+CREATE TRIGGER
+    user_profile_updated_at
+    BEFORE UPDATE
+    ON
+        user_profile
+    FOR EACH ROW
+EXECUTE PROCEDURE
+    sync_updated_at();
+
+
+
+CREATE TRIGGER
+    message_updated_at
+    BEFORE UPDATE
+    ON
+        message
+    FOR EACH ROW
+EXECUTE PROCEDURE
+    sync_updated_at();

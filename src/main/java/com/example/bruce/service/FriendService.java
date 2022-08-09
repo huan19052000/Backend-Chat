@@ -90,7 +90,7 @@ public class FriendService {
 
     }
     public Object getAllFriends(String status) {
-        return friendResponseRepository.getAllFriends(
+        return friendResponseRepository.getFriends(
                 AuthorizationFilter.getCurrentUserId(), status == null ? "" : status
         );
     }
